@@ -1,0 +1,14 @@
+.header {
+  background-color:#efe4b0;
+  width: 100%;
+  height: 5.5rem;
+}
+
+.header img {
+
+  position: absolute;
+  left: 1vh;
+  top: 0.5vh;
+  width: 80px;
+  height: 80px;
+}

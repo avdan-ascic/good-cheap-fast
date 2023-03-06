@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options {
+  position: relative;
+  cursor: pointer;
+  margin-top: 3rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+h1 {
+  font-size: 50px;
+  font-weight: 100;
+  color: #2f4f4f;
+}
+
+button {
+  margin-top: 4rem;
+  font-size: 25px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: #b0c4de;
+  cursor: pointer;
+}
+
+.pick {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+ .pick.selected::after{
+  position: absolute;
+  content: "";
+  width: 35px;
+  height: 60px;
+  bottom: 22%;
+  transform: rotate(50deg);
+  border-bottom: 10px solid green;
+  border-right: 10px solid green;
+  border-radius: 10px;
+} 
+
+
