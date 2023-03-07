@@ -6,14 +6,20 @@ import ValidationModal from "./ValidationModal";
 const Home = () => {
   const [selected, setSelected] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  // const [disabled, setDisabled] = useState();
+  const [clicked, setClicked] = useState({
+    Good: false,
+    Fast: false,
+    Cheap: false,
+  });
+
   let navigate = useNavigate();
 
   const pickHandler = (pick) => {
-    if (selected.includes(pick)) {
-      setSelected(selected.filter((p) => p !== pick));
+    if (selected.includes(pick) || clicked[pick]) {
+      return;
     } else {
       setSelected([...selected, pick]);
+      setClicked({ ...clicked, [pick]: true });
     }
   };
 
@@ -38,41 +44,40 @@ const Home = () => {
   const exitModalHandler = () => {
     setShowModal(false);
     setSelected([]);
+    setClicked({ Good: false, Fast: false, Cheap: false });
   };
-
-  let disable = selected.length >= 2 ? false : true
 
   return (
     <div className="container">
       {showModal && <ValidationModal onExitModalHandler={exitModalHandler} />}
       <h1>Pick two options!</h1>
-      <div className="options">
+      <div className="circles_wrapper">
         <div
-          className={`pick${selected.includes("Good") ? "selected" : ""}`}
-          style={{ backgroundColor: "#2596be" }}
+          className="circle"
           onClick={() => pickHandler("Good")}
+          style={{ backgroundColor: "#2596be" }}
         >
-          Good
+          <div className="circle_content">Good</div>
+          {clicked.Good && <div className="tick">&#10003;</div>}
         </div>
         <div
-         className={`pick${selected.includes("Cheap") ? "selected" : ""}`}
-          style={{ backgroundColor: "#2FE656" }}
+          className="circle"
           onClick={() => pickHandler("Cheap")}
+          style={{ backgroundColor: "#2FE656" }}
         >
-          Cheap
+          <div className="circle_content">Cheap</div>
+          {clicked.Cheap && <div className="tick">&#10003;</div>}
         </div>
         <div
-         className={`pick${selected.includes("Fast") ? "selected" : ""}`}
-          style={{ backgroundColor: "#CD5C5C" }}
+          className="circle"
           onClick={() => pickHandler("Fast")}
+          style={{ backgroundColor: "#CD5C5C" }}
         >
-          Fast
+          <div className="circle_content">Fast</div>
+          {clicked.Fast && <div className="tick">&#10003;</div>}
         </div>
       </div>
-      <button
-        onClick={generateHandler}
-        disabled={disable}
-      >
+      <button onClick={generateHandler} disabled={selected.length < 2}>
         GENERATE DIAGRAM
       </button>
     </div>
